@@ -106,8 +106,8 @@ func (c *Cluster) clusterize(points []*ClusterPoint, index *kdbush.KDBush) []*Cl
 		neighbourIds := index.Within(&kdbush.SimplePoint{X: p.X, Y: p.Y}, r)
 
 		nPoints := p.NumPoints
-		wx := p.X * float64(nPoints)
-		wy := p.Y * float64(nPoints)
+		wx := p.X
+		wy := p.Y
 
 		var foundNeighbours []*ClusterPoint
 		includedPoints := p.IncludedPoints
@@ -117,8 +117,8 @@ func (c *Cluster) clusterize(points []*ClusterPoint, index *kdbush.KDBush) []*Cl
 
 			//Filter out neighbours, that are already processed (and processed point "p" as well)
 			if !b.visited {
-				wx += b.X * float64(b.NumPoints)
-				wy += b.Y * float64(b.NumPoints)
+				wx += b.X
+				wy += b.Y
 				nPoints += b.NumPoints
 				b.visited = true //set the zoom to skip in other iterations
 				foundNeighbours = append(foundNeighbours, b)
